@@ -7,12 +7,19 @@
 
 var MenuController = new class {
 
-	paused		= false;
+	state		= GAME_STATE.INVALID;
 	page	 	= 'main';
 	pagetable	= {};
 	ready		= true;
 
 	Initialize() {
+		// Apply events
+		$.RegisterForUnhandledEvent('ChaosShowMainMenu', ()=>{this.OnShowMainMenu()});
+		$.RegisterForUnhandledEvent('ChaosHideMainMenu', ()=>{this.OnHideMainMenu()});
+		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', ()=>{this.OnShowPauseMenu()});
+		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', ()=>{this.OnHidePauseMenu()});
+
+
 		// Load settings menu.
 		SettingsController.Load('file://{config}/mainmenu/settings.xml');
 		SettingsController.Realize($('#settings'));
@@ -40,15 +47,13 @@ var MenuController = new class {
 
 	SetMovie( url ) {
 		const movie = $("#MainMenuMovie");
-		if (!url) {
+		if (url === '') {
 			movie.Stop();
 			movie.SetMovie('');
 			movie.visible = false;
-			movie.SetReadyForDisplay( false );
 		}
 		else {
 			movie.SetMovie("file://{media}/" + url + ".webm");
-			movie.SetReadyForDisplay( true );
 			movie.visible = true;
 			movie.Play();
 		}
@@ -56,14 +61,19 @@ var MenuController = new class {
 
 
 	SetMenuPaused( paused ) {
-		this.paused = paused;
 		const container = $('#MainMenuContainerPanel');
 		if (paused)	{ container.AddClass('paused') }
 		else		{ container.RemoveClass('paused') }
 	}
 
 
-	SetMenuPage( page, downwards=false ) {
+	SetMenuPage( page ) {
+		this.pagetable[this.page].RemoveClass('visible');
+		this.pagetable[page].AddClass('visible');
+		this.page = page;
+	}
+
+	AnimateMenuPage( page, downwards=false ) {
 		if (!this.ready) { return }
 
 		const classFrom	= downwards ? 'slide-right-fade-out' : 'slide-left-fade-out';
@@ -73,10 +83,8 @@ var MenuController = new class {
 		Transition.Simple({
 			elementFrom: this.pagetable[this.page],
 			elementTo: this.pagetable[page],
-			
 			classFrom: classFrom,
 			classTo: classTo,
-
 			duration: 0.25,
 
 			callback: ()=>{
@@ -91,8 +99,18 @@ var MenuController = new class {
 
 	Escape() {
 		const target = this.pagetable[this.page].GetAttributeString('data-esc', '');
+		const gamestate = GameInterfaceAPI.GetGameUIState();
+
+		if (gamestate === GAME_STATE.PAUSEMENU && this.page === 'paused') {
+			return this.MenuResume();
+		}
+
+		if (this.page === 'settings' && gamestate === GAME_STATE.PAUSEMENU) {
+			return this.AnimateMenuPage( 'paused', true );
+		}
+
 		if (target !== this.page && target !== '') {
-			this.SetMenuPage( target, true );
+			this.AnimateMenuPage( target, true );
 		}
 	};
 
@@ -101,14 +119,47 @@ var MenuController = new class {
 		GameInterfaceAPI.ConsoleCommand('quit');
 	};
 
+
 	SettingsCancel() {
 		SettingsController.CancelChanges();
-		this.SetMenuPage( 'main', true );
+		this.AnimateMenuPage( 'main', true );
 	}
 
 	SettingsApply() {
 		SettingsController.ApplyChanges();
+		this.AnimateMenuPage( 'main' );
+	}
+
+
+	MenuResume() {
+		$.DispatchEvent('ChaosMainMenuResumeGame');
+	}
+
+	MenuDisconnect() {
+		GameInterfaceAPI.ConsoleCommand('disconnect');
+	}
+
+
+	OnShowMainMenu() {
+		this.SetMenuPaused( false );
 		this.SetMenuPage( 'main' );
+		// This is broken because the engine randomly deletes the movie element.
+		// Of course it does. Why wouldn't it? Amazing.
+		// this.SetMovie( 'community_bg1' );
+	}
+
+	OnHideMainMenu() {
+		this.SetMenuPaused( false );
+		// this.SetMovie( '' );
+	}
+
+	OnShowPauseMenu() {
+		this.SetMenuPaused( true );
+		this.SetMenuPage( 'paused' );
+	}
+
+	OnHidePauseMenu() {
+		this.SetMenuPaused( true );
 	}
 	
 }();

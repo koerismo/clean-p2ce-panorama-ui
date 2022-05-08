@@ -46,26 +46,26 @@
 
 						<!-- Primary screen -->
 						<Panel class="main-menu-page" data-page="main" data-esc="main">
-							<TextButton class="main-menu-button" onactivate="MenuController.SetMenuPage('play')"		text="Play" />
-							<TextButton class="main-menu-button" onactivate="MenuController.SetMenuPage('settings')"	text="Settings" />
-							<TextButton class="main-menu-button" onactivate="MenuController.Quit()"						text="Quit" />
+							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('play')"		text="Play" />
+							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('settings')"	text="Settings" />
+							<TextButton class="main-menu-button" onactivate="MenuController.Quit()"							text="Quit" />
 						</Panel>
 
 						<!-- Play screen -->
 						<Panel class="main-menu-page" data-page="play" data-esc="main">
-							<TextButton class="main-menu-button" onactivate="MenuController.SetMenuPage('chapters')"	text="New Game" />
-							<TextButton class="main-menu-button" onactivate="MenuController.SetMenuPage('saves')"		text="Load Save" />
-							<TextButton class="main-menu-button" onactivate="MenuController.SetMenuPage('main', true)"	text="Back" />
+							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('chapters')"	text="New Game" />
+							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('saves')"		text="Load Save" />
+							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Back" />
 						</Panel>
 
 						<!-- Chapter select screen -->
 						<Panel class="main-menu-page" data-page="chapters" data-esc="play">
-							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"					text="Not Ready :(" />
+							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Not Ready :(" />
 						</Panel>
 
 						<!-- Save select screen -->
 						<Panel class="main-menu-page" data-page="saves" data-esc="play">
-							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"					text="Not Ready :(" />
+							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Not Ready :(" />
 						</Panel>
 
 						<!-- Settings screen -->
@@ -75,6 +75,13 @@
 								<TextButton onactivate="MenuController.SettingsApply()" text="Apply" />
 								<TextButton onactivate="MenuController.SettingsCancel()" text="Cancel" />
 							</Panel>
+						</Panel>
+
+						<!-- Pasue screen -->
+						<Panel class="main-menu-page" data-page="paused" data-esc="main">
+							<TextButton class="main-menu-button" onactivate="MenuController.MenuResume()"					text="Return To Game" />
+							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('settings')"	text="Settings" />
+							<TextButton class="main-menu-button" onactivate="MenuController.MenuDisconnect()"				text="Exit Map" />
 						</Panel>
 
 					</Panel>
