@@ -1,0 +1,54 @@
+@use 'transitions'
+@use 'variables'
+	
+#MainMenu,
+#MainMenuContainerPanel,
+#MainMenuInput,
+#MainMenuCore,
+#MainMenuBackground,
+#MainMenuMovieParent,
+#MainMenuMovie,
+#MainMenuCampaignFrameParent,
+#MainMenuCampaignFrame,
+#BackbufferImagePanel
+	width: 100%
+	height: 100%
+
+#menu-root
+	align: center center
+	height: 80%
+	width: 80%
+	//overflow: noclip
+
+	#main-logo
+		align: left top
+		height: 30%
+
+	.main-menu-page
+		align: left bottom
+		width: 100%
+		height: 60%
+
+		flow-children: down
+		visibility: collapse
+
+	.main-menu-page.visible
+		visibility: visible
+	
+	.main-menu-button
+		background-color: variables.$button-background
+		color: variables.$button-color
+		min-width: 600px
+		margin-bottom: 10px
+
+		&:hover
+			background-color: variables.$button-background-hl
+			color: variables.$button-color-hl
+
+	
+		Label
+			width: 100%
+			text-align: center
+			font-family: variables.$font-family
+			font-size: 24px
+			padding: 10px 20px

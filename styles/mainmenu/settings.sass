@@ -1,0 +1,138 @@
+@use 'variables'
+
+#menu-root #settings-container
+	flow-children: down
+	margin: 40px
+	width: 700px
+
+	Label
+		font-family: variables.$font-family
+
+#settings-footer TextButton,
+#settings
+	box-shadow: variables.$box-shadow
+
+#settings
+	background-color: variables.$button-background
+	color: variables.$button-color
+	padding: 20px
+	flow-children: down
+	width: 100%
+	height: 300px
+
+#settings-head
+	flow-children: right
+	margin-bottom: 10px
+	border-bottom: 1px solid rgba( variables.$button-color, 0.5 )
+	width: 100%
+
+#settings-head > Label
+	font-size: 20px
+	text-align: center
+	font-weight: lighter
+	padding: 2px 20px
+	margin-bottom: 5px
+	color: lighten( variables.$button-color, 20% )
+
+#settings-head > Label.active
+	color: variables.$button-color
+	font-weight: bolder
+
+#settings-body
+	flow-children: down
+	width: 100%
+
+#settings-body > Panel
+	visibility: collapse
+	flow-children: down
+	width: 100%
+
+#settings-body > Panel.active
+	visibility: visible
+
+#settings-body Panel.setting-row
+	flow-children: right
+	width: 100%
+	border-bottom: 1px solid rgba( variables.$button-color, 0.1 )
+	padding: 4px 0px
+
+#settings-body .setting-row-title
+	font-size: 18px
+	align: left center
+
+#settings-body .setting-row-value
+	align: right center
+	background-color: lighten( variables.$button-background, 5% )
+	padding: 3px 15px
+	margin: 2px
+	border: 1px solid #0003
+
+#settings-body TextButton.setting-row-value:hover
+	background-color: variables.$button-background-hl
+	color: variables.$button-color-hl
+
+#settings-body .setting-row-value Label
+	font-size: 18px
+	font-weight: normal
+
+#settings-body .setting-row.setting-type-label
+	padding: 25px 0 5px 20px
+	border-bottom: 1px solid rgba( variables.$button-color, 0.5 )
+
+	Label
+		font-weight: bolder
+		font-size: 13px
+
+#settings-footer
+	flow-children: left
+	margin-top: 10px
+	width: 100%
+
+#settings-footer TextButton
+	background-color: variables.$button-background
+	color: variables.$button-color
+	padding: 10px 14px
+	margin-left: 10px
+
+	&:hover
+		background-color: variables.$button-background-hl
+		color: variables.$button-color-hl
+
+#settings-footer TextButton Label
+	font-size: 20px
+	font-weight: normal
+
+
+
+#settings-body Slider.setting-row-value
+	border: 0px solid transparent
+	background-color: #0000
+	width: 150px
+	padding: 0
+
+	#SliderTrack
+		align: left center
+		height: 2px
+		background-color: lighten(variables.$button-color, 60%)
+		width: 100%
+
+	#SliderTrackProgress
+		align: left center
+		background-color: lighten(variables.$button-color, 40%)
+		height: 2px
+		width: 100%
+
+	#SliderThumb
+		margin: 0
+		padding: 0
+		background-color: lighten(variables.$button-color, 10%)
+		width: 16px
+		height: 16px
+
+		&:hover
+			background-color: variables.$orange
+
+	#SliderDefault
+		background-color: #000
+		width: 4px
+		height: 4px

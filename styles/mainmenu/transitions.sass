@@ -1,0 +1,127 @@
+$slide-in-out-duration: 0.25s
+$ease-in: ease-in
+$ease-out: cubic-bezier(.22,.61,.36,1)
+$slide-length: 60px
+
+
+// ############################################## LEFT RIGHT
+
+
+
+@keyframes slide-left-fade-out
+	0%
+		opacity: 1
+		transform: translateX(0px)
+	100%
+		opacity: 0
+		transform: translateX(-$slide-length)
+
+@keyframes slide-left-fade-in
+	0%
+		opacity: 0
+		transform: translateX($slide-length)
+	100%
+		opacity: 1
+		transform: translateX(0px)
+
+@keyframes slide-right-fade-out
+	0%
+		opacity: 1
+		transform: translateX(0px)
+	100%
+		opacity: 0
+		transform: translateX($slide-length)
+
+@keyframes slide-right-fade-in
+	0%
+		opacity: 0
+		transform: translateX(-$slide-length)
+	100%
+		opacity: 1
+		transform: translateX(0px)
+
+.slide-left-fade-out
+	animation-name: slide-left-fade-out
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-out
+
+.slide-left-fade-in
+	animation-name: slide-left-fade-in
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-in
+
+.slide-right-fade-out
+	animation-name: slide-right-fade-out
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-out
+
+.slide-right-fade-in
+	animation-name: slide-right-fade-in
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-in
+
+
+
+// ############################################## UP DOWN
+
+
+
+@keyframes slide-up-fade-out
+	0%
+		opacity: 1
+		transform: translateY(0px)
+	100%
+		opacity: 0
+		transform: translateY(-$slide-length)
+
+@keyframes slide-up-fade-in
+	0%
+		opacity: 0
+		transform: translateY($slide-length)
+	100%
+		opacity: 1
+		transform: translateY(0px)
+
+@keyframes slide-down-fade-out
+	0%
+		opacity: 1
+		transform: translateY(0px)
+	100%
+		opacity: 0
+		transform: translateY($slide-length)
+
+@keyframes slide-down-fade-in
+	0%
+		opacity: 0
+		transform: translateY(-$slide-length)
+	100%
+		opacity: 1
+		transform: translateY(0px)
+
+.slide-up-fade-out
+	animation-name: slide-up-fade-out
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-out
+
+.slide-up-fade-in
+	animation-name: slide-up-fade-in
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-in
+
+.slide-down-fade-out
+	animation-name: slide-down-fade-out
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-out
+
+.slide-down-fade-in
+	animation-name: slide-down-fade-in
+	animation-duration: $slide-in-out-duration
+	animation-iteration-count: 1
+	animation-timing-function: $ease-in

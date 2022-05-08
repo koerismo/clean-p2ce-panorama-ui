@@ -2,6 +2,7 @@
 
 // --------------------------------------------------------------------------------------------------
 // Purpose: Main menu controller
+//			THIS IS NO LONGER USED, I'M ONLY KEEPING IT HERE FOR DOC PURPOSES.
 //			NOTE: This is NOT a class because the main menu uses a global v8 context, which is never
 //			cleared. This means that if you do use a class here, reloading the JS file will result
 //			in v8 complaining that the class is already defined. So basically, yes, you can
@@ -120,9 +121,9 @@ var MainMenuController = (function () {
 		GameInterfaceAPI.ConsoleCommand("map " + map);
 	}
 
-	function _onEscapeKeyPressed(_eSource, _nRepeats, _focusPanel) {
+	function _onEscapeKeyPressed(eSource, nRepeats, focusPanel) {
 		// Resume game (pause menu mode)
-		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
+		if (GameInterfaceAPI.GetGameUIState()) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
 	}
 
@@ -187,7 +188,6 @@ var MainMenuController = (function () {
 		onHideMainMenu: _onHideMainMenu,
 		onShowPauseMenu: _onShowPauseMenu,
 		onHidePauseMenu: _onHidePauseMenu,
-		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
 		onEscapeKeyPressed: _onEscapeKeyPressed,
 		initializeSettings: _initializeSettings,
 		toggleCVar: _onToggleCVar,

@@ -1,0 +1,58 @@
+<!-- NOTE: THIS FILE FORMAT IS TEMPORARY. IT WILL BE UPDATED WHEN BETTER DATA-READING METHODS BECOME AVAILABLE. -->
+<root>
+	<Panel>
+		<Panel name="Game">
+
+			<Panel type="slider" name="Field of View" cvars="cl_fov" >
+				<Label display="Low (80)"  cvars="80" />
+				<Label display="High (120)"  cvars="120" />
+			</Panel>
+
+			<Panel type="label" name="YORKER SETTINGS"></Panel>
+
+			<Panel type="options" name="im walkin heah" cvars="" >
+				<Label display="bada bing"  cvars="" />
+				<Label display="bada boom"  cvars="" />
+			</Panel>
+
+
+		</Panel>
+		<Panel name="Video">
+
+			<Panel type="options" name="CPU Level" cvars="cpu_level" >
+				<Label display="Low"  cvars="0" />
+				<Label display="Med"  cvars="1" />
+				<Label display="High" cvars="2" />
+			</Panel>
+
+			<Panel type="options" name="Resolution" cvars="defaultres, defaultresheight" >
+				<Label display="852 x 480"   cvars="852, 480"   />
+				<Label display="1176 x 664"  cvars="1176, 664"  />
+				<Label display="1280 x 720"  cvars="1280, 720"  />
+				<Label display="1360 x 768"  cvars="1360, 768"  />
+				<Label display="1366 x 768"  cvars="1366, 768"  />
+				<Label display="1600 x 900"  cvars="1600, 900"  />
+				<Label display="1768 x 992"  cvars="1768, 992"  />
+				<Label display="1920 x 1080" cvars="1920, 1080" />
+			</Panel>
+
+			<Panel type="options" name="Display Mode" cvars="fullscreen, nowindowborder" >
+				<Label display="Windowed"             cvars="0,0" />
+				<Label display="Windowed Borderless"  cvars="0,1" />
+				<Label display="Fullscreen"           cvars="1,0" />
+			</Panel>
+
+			<Panel type="options" name="Vertical Sync" cvars="mat_vsync" >
+				<Label display="Enabled"     cvars="0" />
+				<Label display="Disabled"    cvars="0" />
+			</Panel>
+
+		</Panel>
+
+		<Panel name="Audio"></Panel>
+		<Panel name="Keyboard"></Panel>
+		<Panel name="Controller"></Panel>
+	</Panel>
+</root>
+
+
