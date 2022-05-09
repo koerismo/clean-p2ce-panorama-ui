@@ -127,12 +127,18 @@ var MenuController = new class {
 
 	SettingsCancel() {
 		SettingsController.CancelChanges();
-		this.AnimateMenuPage( 'main', true );
+		if (GameInterfaceAPI.GetGameUIState() === GAME_STATE.PAUSEMENU)
+			this.AnimateMenuPage( 'paused', true );
+		else
+			this.AnimateMenuPage( 'main', true );
 	}
 
 	SettingsApply() {
 		SettingsController.ApplyChanges();
-		this.AnimateMenuPage( 'main' );
+		if (GameInterfaceAPI.GetGameUIState() === GAME_STATE.PAUSEMENU)
+			this.AnimateMenuPage( 'paused' );
+		else
+			this.AnimateMenuPage( 'main' );
 	}
 
 

@@ -1,3 +1,10 @@
+"use strict";
+
+// The lot of this code is really unpolished.
+// It will probably be rewritten at a later date.
+// - Baguettery
+
+
 var SettingsController = new class {
 
 	/** @type {Object} */
