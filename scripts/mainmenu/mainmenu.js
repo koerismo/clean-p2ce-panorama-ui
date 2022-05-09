@@ -100,6 +100,11 @@ var MenuController = new class {
 		const target = this.pagetable[this.page].GetAttributeString('data-esc', '');
 		const gamestate = GameInterfaceAPI.GetGameUIState();
 
+		if (this.page === 'main') {
+			this.MenuHidePlayMenu();
+			this.MenuHideQuitMenu();
+		}
+
 		if (gamestate === GAME_STATE.PAUSEMENU && this.page === 'paused') {
 			return this.MenuResume();
 		}
@@ -186,9 +191,9 @@ var MenuController = new class {
 
 
 	// It's modular *enough*
-	MenuTogglePlayMenu() {this.MenuHideQuitMenu(); this.MenuToggleSubmenu( 'play-container', 'play-button' )}
+	MenuTogglePlayMenu() {if (!this.ready) {return}; this.MenuHideQuitMenu(); this.MenuToggleSubmenu( 'play-container', 'play-button' )}
 	MenuHidePlayMenu() {this.MenuHideSubmenu( 'play-container', 'play-button' )}
-	MenuToggleQuitMenu() {this.MenuHidePlayMenu(); this.MenuToggleSubmenu( 'quit-container', 'quit-button' )}
+	MenuToggleQuitMenu() {if (!this.ready) {return}; this.MenuHidePlayMenu(); this.MenuToggleSubmenu( 'quit-container', 'quit-button' )}
 	MenuHideQuitMenu() {this.MenuHideSubmenu( 'quit-container', 'quit-button' )}
 
 	// If this gets too absurd, I'll make a function to do it automatically.
