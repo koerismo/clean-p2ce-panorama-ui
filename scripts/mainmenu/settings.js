@@ -134,12 +134,13 @@ var SettingsController = new class {
 	ReadToMenu() {
 		this.root.FindChild( 'settings-body' ).Children().forEach((category_panel, category_id)=>{
 			category_panel.Children().forEach((setting_panel, setting_id)=>{
+				
 				const setting = this.categories[category_id].settings[setting_id];
 				if (setting.type === 'label') {return}
 
-				const choice_id = this.GetMenuChoice(category_id,setting_id);
 				if (setting.type === 'options') {
-					setting_panel.GetLastChild().text = setting.choices[this.GetMenuChoice(category_id,setting_id)].display
+					const choice_id = this.GetMenuChoice(category_id,setting_id);
+					setting_panel.GetLastChild().text = setting.choices[choice_id].display;
 				}
 				else if (setting.type === 'slider') {
 					setting_panel.GetLastChild().value = 0 // This is gonna require some math to inverse-lerp the cvar's value between the two boundaries. Will do later.

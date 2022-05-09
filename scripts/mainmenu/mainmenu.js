@@ -7,7 +7,6 @@
 
 var MenuController = new class {
 
-	state		= GAME_STATE.INVALID;
 	page	 	= 'main';
 	pagetable	= {};
 	ready		= true;
@@ -68,6 +67,8 @@ var MenuController = new class {
 
 
 	SetMenuPage( page ) {
+		eval(this.pagetable[this.page].GetAttributeString('data-onleave', ''));
+		eval(this.pagetable[page].GetAttributeString('data-onenter', ''));
 		this.pagetable[this.page].RemoveClass('visible');
 		this.pagetable[page].AddClass('visible');
 		this.page = page;
@@ -89,9 +90,7 @@ var MenuController = new class {
 
 			callback: ()=>{
 				this.ready = true;
-				this.pagetable[this.page].RemoveClass('visible');
-				this.pagetable[page].AddClass('visible');
-				this.page = page;
+				this.SetMenuPage(page);
 			}
 		});
 	}
@@ -105,8 +104,9 @@ var MenuController = new class {
 			return this.MenuResume();
 		}
 
-		if (this.page === 'settings' && gamestate === GAME_STATE.PAUSEMENU) {
-			return this.AnimateMenuPage( 'paused', true );
+		if (this.page === 'settings') {
+			SettingsController.CancelChanges();
+			if (gamestate === GAME_STATE.PAUSEMENU) { return this.AnimateMenuPage( 'paused', true ) }
 		}
 
 		if (target !== this.page && target !== '') {
@@ -139,6 +139,61 @@ var MenuController = new class {
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 	}
 
+	
+	submenus = {}
+	MenuShowSubmenu( submenu_id, button_id ) {
+		if (this.submenus[submenu_id] === true) {return}
+		this.submenus[submenu_id] = true;
+
+		const menupage	= $('#'+submenu_id);
+		const button	= $('#'+button_id);
+
+		menupage.AddClass('visible');
+		button.AddClass('expanded');
+		menupage.AddClass('slide-right-fade-in');
+		$.Schedule( 0.25, ()=>{
+			menupage.RemoveClass('slide-right-fade-in');
+		});
+	}
+
+	MenuHideSubmenu( submenu_id, button_id ) {
+		if (this.submenus[submenu_id] === false) {return}
+		this.submenus[submenu_id] = false;
+
+		const mainpage	= this.pagetable['main'];
+		const menupage	= $('#'+submenu_id);
+		const button	= $('#'+button_id);
+
+		button.RemoveClass('expanded');
+		menupage.AddClass('slide-left-fade-out');
+		$.Schedule( 0.25, ()=>{
+			menupage.RemoveClass('visible');
+			menupage.RemoveClass('slide-left-fade-out');
+		});
+	}
+
+	MenuToggleSubmenu( submenu_id, button_id ) {
+		if (!this.ready) {return}
+
+		if ( !(submenu_id in this.submenus) )
+			this.submenus[submenu_id] = false;
+
+		if (!this.submenus[submenu_id])
+			this.MenuShowSubmenu(submenu_id, button_id);
+		else
+			this.MenuHideSubmenu(submenu_id, button_id);
+	}
+
+
+	// It's modular *enough*
+	MenuTogglePlayMenu() {this.MenuHideQuitMenu(); this.MenuToggleSubmenu( 'play-container', 'play-button' )}
+	MenuHidePlayMenu() {this.MenuHideSubmenu( 'play-container', 'play-button' )}
+	MenuToggleQuitMenu() {this.MenuHidePlayMenu(); this.MenuToggleSubmenu( 'quit-container', 'quit-button' )}
+	MenuHideQuitMenu() {this.MenuHideSubmenu( 'quit-container', 'quit-button' )}
+
+	// If this gets too absurd, I'll make a function to do it automatically.
+	MenuHideHomeSubmenus() {this.MenuHidePlayMenu(); this.MenuHideQuitMenu()}
+
 
 	OnShowMainMenu() {
 		this.SetMenuPaused( false );
@@ -164,4 +219,4 @@ var MenuController = new class {
 	
 }();
 
-$.Schedule(0.1, ()=>{MenuController.Initialize()});
+$.Schedule(0.0, ()=>{MenuController.Initialize()});

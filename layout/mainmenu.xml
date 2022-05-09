@@ -1,7 +1,5 @@
 <root>
 	<styles>
-		<!-- <include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/controls/togglebutton.sass" /> -->
 		<include src="file://{resources}/styles/mainmenu/settings.sass" />
 		<include src="file://{resources}/styles/mainmenu/mainmenu.sass" />
 	</styles>
@@ -45,26 +43,34 @@
 						<Image id="main-logo" defaultsrc="file://{images}/menu/p2ce/logo_title.png" scaling="stretch-to-cover-preserve-aspect" />
 
 						<!-- Primary screen -->
-						<Panel class="main-menu-page" data-page="main" data-esc="main">
-							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('play')"		text="Play" />
-							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('settings')"	text="Settings" />
-							<TextButton class="main-menu-button" onactivate="MenuController.Quit()"							text="Quit" />
-						</Panel>
-
-						<!-- Play screen -->
-						<Panel class="main-menu-page" data-page="play" data-esc="main">
-							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('chapters')"	text="New Game" />
-							<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('saves')"		text="Load Save" />
-							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Back" />
+						<Panel id="home-container" class="main-menu-page" data-page="main" data-esc="main" data-onleave="MenuController.MenuHideHomeSubmenus()">
+							<Panel class="vertical-flow">
+								<TextButton id="play-button" class="main-menu-button" onactivate="MenuController.MenuTogglePlayMenu()"	text="Play" />
+								<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('addons')"				text="Manage Addons" />
+								<TextButton class="main-menu-button" onactivate="MenuController.AnimateMenuPage('settings')"			text="Settings" />
+								<TextButton id="quit-button" class="main-menu-button" onactivate="MenuController.MenuToggleQuitMenu()"	text="Quit" />
+							</Panel>
+							<Panel id="home-submenu-container">
+								<Panel class="vertical-flow" id="play-container">
+									<TextButton class="main-menu-button mini" onactivate="MenuController.AnimateMenuPage('chapters')"	text="New Game" />
+									<TextButton class="main-menu-button mini" onactivate="MenuController.AnimateMenuPage('saves')"		text="Load Save" />
+								</Panel>
+								<Panel class="vertical-flow" id="quit-container">
+									<Panel class="main-menu-button-dummy" />
+									<Panel class="main-menu-button-dummy" />
+									<TextButton class="main-menu-button mini" onactivate="MenuController.MenuHideQuitMenu()"			text="Cancel" />
+									<TextButton class="main-menu-button mini" onactivate="MenuController.Quit()"						text="Quit" />
+								</Panel>
+							</Panel>
 						</Panel>
 
 						<!-- Chapter select screen -->
-						<Panel class="main-menu-page" data-page="chapters" data-esc="play">
+						<Panel class="main-menu-page" data-page="chapters" data-esc="main">
 							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Not Ready :(" />
 						</Panel>
 
 						<!-- Save select screen -->
-						<Panel class="main-menu-page" data-page="saves" data-esc="play">
+						<Panel class="main-menu-page" data-page="saves" data-esc="main">
 							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Not Ready :(" />
 						</Panel>
 
@@ -75,6 +81,11 @@
 								<TextButton onactivate="MenuController.SettingsApply()" text="Apply" />
 								<TextButton onactivate="MenuController.SettingsCancel()" text="Cancel" />
 							</Panel>
+						</Panel>
+
+						<!-- Addon management screen -->
+						<Panel class="main-menu-page" data-page="addons" data-esc="main">
+							<TextButton class="main-menu-button" onactivate="MenuController.Escape()"						text="Not Ready :(" />
 						</Panel>
 
 						<!-- Pasue screen -->

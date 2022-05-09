@@ -15,18 +15,25 @@
 	height: 100%
 
 
+Panel.vertical-flow
+	flow-children: down
+
+Panel.horizontal-flow
+	flow-children: right
+
+
 #MainMenu.paused #MainMenuMovie
 	visibility: collapse
 
 
 #menu-root
 	align: center center
-	height: 80%
+	height: 70%
 	width: 80%
-	//overflow: noclip
 
 	#main-logo
 		align: left top
+		position: -30px 0 0
 		height: 30%
 
 	.main-menu-page
@@ -37,14 +44,17 @@
 		flow-children: down
 		visibility: collapse
 
-	.main-menu-page.visible
-		visibility: visible
+		&.visible
+			visibility: visible
 	
 	.main-menu-button
 		background-color: variables.$button-background
 		color: variables.$button-color
 		min-width: 600px
 		margin-bottom: 10px
+
+		&.mini
+			min-width: 300px
 
 		&:hover
 			background-color: variables.$button-background-hl
@@ -56,3 +66,23 @@
 			font-family: variables.$font-family
 			font-size: 24px
 			padding: 10px 20px
+
+	.main-menu-button-dummy
+		min-width: 600px
+		margin-bottom: 10px
+		height: 44px
+
+	#home-container
+		flow-children: right
+
+		.main-menu-button
+			margin-right: 10px
+
+		#home-submenu-container > Panel
+			visibility: collapse
+
+		#home-submenu-container > Panel.visible
+			visibility: visible
+		
+		.main-menu-button.expanded
+			background-color: darken( variables.$button-background-hl, 7 )

@@ -2,7 +2,6 @@
 
 #menu-root #settings-container
 	flow-children: down
-	margin: 40px
 	width: 700px
 
 	Label
@@ -23,7 +22,7 @@
 #settings-head
 	flow-children: right
 	margin-bottom: 10px
-	border-bottom: 1px solid rgba( variables.$button-color, 0.5 )
+	border-bottom: 2px solid rgba( variables.$button-color, 0.5 )
 	width: 100%
 
 #settings-head > Label
@@ -71,13 +70,16 @@
 	background-color: variables.$button-background-hl
 	color: variables.$button-color-hl
 
+#settings-body TextButton.setting-row-value:active
+	background-color: darken(variables.$button-background-hl, 4)
+
 #settings-body .setting-row-value Label
 	font-size: 18px
 	font-weight: normal
 
 #settings-body .setting-row.setting-type-label
 	padding: 25px 0 5px 20px
-	border-bottom: 1px solid rgba( variables.$button-color, 0.5 )
+	border-bottom: 2px solid rgba( variables.$button-color, 0.3 )
 
 	Label
 		font-weight: bolder
