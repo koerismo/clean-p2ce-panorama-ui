@@ -8,18 +8,12 @@
 	
 	<Debugger>
 		<Panel class="DebugToolbar">
-			<Button id="InspectButton">
-				<Label text="#UI_Inspect" />
-			</Button>
-			<ToggleButton id="DevInfo">
-				<Label text="#Debugger_DevInfo" />
-			</ToggleButton>
-			<Button id="PaintInfo">
-				<Label text="#Debugger_PaintInfo" />
-			</Button>
-			<Button id="ToggleTheme" onactivate="Debugger.toggleTheme()">
-				<Label text="#Debugger_ToggleTheme" />
-			</Button>
+			<Button id="InspectButton" class="ToolbarButton"><Label text="#UI_Inspect" /></Button>
+			<ToggleButton id="DevInfo" class="ToolbarButton"><Label text="#Debugger_DevInfo" /></ToggleButton>
+			<Button id="PaintInfo" class="ToolbarButton"><Label text="#Debugger_PaintInfo" /></Button>
+			<!-- <Button id="ToggleTheme" onactivate="Debugger.toggleTheme()"><Label text="#Debugger_ToggleTheme" /></Button> -->
+			
+			<!-- TODO: Remove these from the game. -->
 			<Panel id="InMemoryButtons">
 				<Button id="RevertButton">
 					<Label text="#Debugger_Revert" />
@@ -28,6 +22,7 @@
 					<Label text="#Debugger_Save" />
 				</Button>
 			</Panel>
+
 		</Panel>
 		<DebugPanelParents id="DebugPanelParents" />
 		<Panel class="DebugBody">
@@ -36,7 +31,9 @@
 				<VerticalSplitter />
 				<DebugPanel id="DebugPanel" />
 			</Panel>
-			<HorizontalSplitter />
+
+			<!-- <HorizontalSplitter /> -->
+
 			<Panel class="DebugJSConsole">
 				<Label allowrawtext="true" id="JSConsoleText" />
 				<TextEntry id="JSConsoleInput" onmoveup="UpdateJSConsolePriorHistory()" onmovedown="UpdateJSConsoleNextHistory()" />
